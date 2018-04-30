@@ -1,0 +1,13 @@
+{
+  "name": "CalculadoraModyValArq",
+  "version": "1.0.0",
+  "description": "Tarea Calculadora",
+  "author": "Carlos Corzo <cfc603@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
