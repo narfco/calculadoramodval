@@ -2,11 +2,9 @@
 
 const express = require('express');
 
-// Constants
 const PORT = 7593;
-const HOST = 'localhost';
+const HOST = '0.0.0.0'
 
-// App
 const app = express();
 app.get('/api/v1/calculator/add/(((-?[0-9]+)[/]*))+', (req, res) => {
    var numeros = req.params[0].split('/');
