@@ -7,45 +7,50 @@ const HOST = '0.0.0.0'
 
 const app = express();
 app.get('/api/v1/calculator/add/(((-?[0-9]+)[/]*))+', (req, res) => {
-   var numeros = req.params[0].split('/');
-   var resultado = 0;
+    var numeros = req.params[0].split('/');
+    var resultado = 0;
 
-   for (var i in numeros){
-       resultado += parseInt(numeros[i]);
-   }
+    for (var i in numeros) {
+        resultado += parseInt(numeros[i]);
+    }
 
-  res.send(resultado.toString());
+    res.send(resultado.toString());
 });
 app.get('/api/v1/calculator/div/(((-?[0-9]+)[/]*))+', (req, res) => {
     var numeros = req.params[0].split('/');
     var resultado = numeros[0];
-    
-    for (var i = 1 ; i < numeros.length ; i++){
-        resultado = resultado / parseInt(numeros[i]);
+
+    for (var i = 1; i < numeros.length; i++) {
+        if (numeros[i] != 0) {
+            resultado = resultado / parseInt(numeros[i]);
+        } else {
+            resultado = "∞";
+            i = numeros.length;
+        }
     }
- 
-   res.send(resultado.toString());
- });
- app.get('/api/v1/calculator/subs/(((-?[0-9]+)[/]*))+', (req, res) => {
+
+    res.send(resultado.toString());
+});
+app.get('/api/v1/calculator/subs/(((-?[0-9]+)[/]*))+', (req, res) => {
     var numeros = req.params[0].split('/');
     var resultado = 0;
- 
-    for (var i in numeros){
+
+    for (var i in numeros) {
         resultado -= parseInt(numeros[i]);
     }
- 
-   res.send(resultado.toString());
- });
- app.get('/api/v1/calculator/mult/(((-?[0-9]+)[/]*))+', (req, res) => {
+
+    res.send(resultado.toString());
+});
+app.get('/api/v1/calculator/mult/(((-?[0-9]+)[/]*))+', (req, res) => {
     var numeros = req.params[0].split('/');
     var resultado = 1;
- 
-    for (var i in numeros){
-        resultado = resultado *  parseInt(numeros[i]);
+
+    for (var i in numeros) {
+        resultado = resultado * parseInt(numeros[i]);
     }
- 
-   res.send(resultado.toString());
- });
+
+    res.send(resultado.toString());
+});
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
