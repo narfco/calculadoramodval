@@ -4,17 +4,23 @@ const express = require('express');
 
 const PORT = 7593;
 const HOST = '0.0.0.0'
+var regex = new RegExp("^((((-?[0-9]+)[\/]*))+)$");
 
 const app = express();
-app.get('/api/v1/calculator/add/(((-?[0-9]+)[/]*))+', (req, res) => {
-    var numeros = req.params[0].split('/');
-    var resultado = 0;
+app.get('/api/v1/calculator/add/*', (req, res) => {
 
-    for (var i in numeros) {
-        resultado += parseInt(numeros[i]);
+    if (regex.test(req.params[0].toString())) {
+        var numeros = req.params[0].split('/');
+        var resultado = 0;
+
+        for (var i in numeros) {
+            resultado += parseInt(numeros[i]);
+        }
+
+        res.send({ "result": + resultado.toString() });
+    } else {
+        res.send(404);
     }
-
-    res.send(resultado.toString());
 });
 app.get('/api/v1/calculator/div/(((-?[0-9]+)[/]*))+', (req, res) => {
     var numeros = req.params[0].split('/');
