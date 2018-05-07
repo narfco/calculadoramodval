@@ -22,40 +22,53 @@ app.get('/api/v1/calculator/add/*', (req, res) => {
         res.send(404);
     }
 });
-app.get('/api/v1/calculator/div/(((-?[0-9]+)[/]*))+', (req, res) => {
-    var numeros = req.params[0].split('/');
-    var resultado = numeros[0];
+app.get('/api/v1/calculator/div/*', (req, res) => {
 
-    for (var i = 1; i < numeros.length; i++) {
-        if (numeros[i] != 0) {
-            resultado = resultado / parseInt(numeros[i]);
-        } else {
-            resultado = "∞";
-            i = numeros.length;
+    if (regex.test(req.params[0].toString())) {
+        var numeros = req.params[0].split('/');
+        var resultado = numeros[0];
+
+        for (var i = 1; i < numeros.length; i++) {
+            if (numeros[i] != 0) {
+                resultado = resultado / parseInt(numeros[i]);
+            } else {
+                resultado = "∞";
+                i = numeros.length;
+            }
         }
-    }
 
-    res.send(resultado.toString());
+        res.send(resultado.toString());
+    } else {
+        res.send(404);
+    }
 });
-app.get('/api/v1/calculator/subs/(((-?[0-9]+)[/]*))+', (req, res) => {
-    var numeros = req.params[0].split('/');
-    var resultado = 0;
+app.get('/api/v1/calculator/subs/*', (req, res) => {
+    if (regex.test(req.params[0].toString())) {
+        var numeros = req.params[0].split('/');
+        var resultado = 0;
 
-    for (var i in numeros) {
-        resultado -= parseInt(numeros[i]);
+        for (var i in numeros) {
+            resultado -= parseInt(numeros[i]);
+        }
+
+        res.send(resultado.toString());
+    } else {
+        res.send(404);
     }
-
-    res.send(resultado.toString());
 });
-app.get('/api/v1/calculator/mult/(((-?[0-9]+)[/]*))+', (req, res) => {
-    var numeros = req.params[0].split('/');
-    var resultado = 1;
+app.get('/api/v1/calculator/mult/*', (req, res) => {
+    if (regex.test(req.params[0].toString())) {
+        var numeros = req.params[0].split('/');
+        var resultado = 1;
 
-    for (var i in numeros) {
-        resultado = resultado * parseInt(numeros[i]);
+        for (var i in numeros) {
+            resultado = resultado * parseInt(numeros[i]);
+        }
+
+        res.send(resultado.toString());
+    } else {
+        res.send(404);
     }
-
-    res.send(resultado.toString());
 });
 
 app.listen(PORT, HOST);
