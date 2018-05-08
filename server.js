@@ -37,7 +37,7 @@ app.get('/api/v1/calculator/div/*', (req, res) => {
             }
         }
 
-        res.send(resultado.toString());
+        res.send({ "result": + resultado.toString() });
     } else {
         res.send(404);
     }
@@ -51,7 +51,7 @@ app.get('/api/v1/calculator/subs/*', (req, res) => {
             resultado -= parseInt(numeros[i]);
         }
 
-        res.send(resultado.toString());
+        res.send({ "result": + resultado.toString() });
     } else {
         res.send(404);
     }
@@ -65,7 +65,7 @@ app.get('/api/v1/calculator/mult/*', (req, res) => {
             resultado = resultado * parseInt(numeros[i]);
         }
 
-        res.send(resultado.toString());
+        res.send({ "result": + resultado.toString() });
     } else {
         res.send(404);
     }
